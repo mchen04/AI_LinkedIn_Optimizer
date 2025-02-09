@@ -42,8 +42,7 @@ export const register = async (
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json({ errors: errors.array() });
-      return;
+      throw new AppError(errors.array()[0].msg, 400);
     }
 
     const { email, password, name } = req.body;

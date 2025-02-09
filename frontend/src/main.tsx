@@ -13,7 +13,6 @@ import { UploadPage } from './pages/UploadPage';
 import { AnalysisPage } from './pages/AnalysisPage';
 import './index.css';
 
-// Define routes
 const rootRoute = new RootRoute({
   component: App,
 });
@@ -42,7 +41,6 @@ const analysisRoute = new Route({
   component: AnalysisPage,
 });
 
-// Create route tree
 const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
@@ -58,7 +56,10 @@ declare module '@tanstack/react-router' {
   }
 }
 
-createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Root element not found');
+
+createRoot(rootElement).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>

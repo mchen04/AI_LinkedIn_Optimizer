@@ -3,9 +3,9 @@ import { Outlet } from '@tanstack/react-router';
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen">
       <Outlet />
-    </div>
+    </main>
   );
 }
 

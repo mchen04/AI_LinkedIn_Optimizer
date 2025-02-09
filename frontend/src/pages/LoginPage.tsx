@@ -4,6 +4,8 @@ import { useAuthStore } from '../store/authStore';
 import { LinkedinIcon, ArrowLeft } from 'lucide-react';
 
 export function LoginPage() {
+  console.log('LoginPage component rendered'); // Add this line at the start of the component
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -29,18 +31,18 @@ export function LoginPage() {
   };
 
   return (
-    <div className="fixed inset-0 min-h-screen bg-gradient-to-br from-blue-50 via-gray-50 to-blue-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 animate-fade-in-up z-[100]">
+    <div className="relative min-h-screen bg-gradient-to-br from-blue-50 to-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <button
         onClick={() => navigate({ to: '/' })}
-        className="absolute top-8 left-8 text-gray-600 hover:text-gray-900 flex items-center space-x-2 transition-all duration-300 hover:-translate-x-1 z-[110]"
+        className="absolute top-8 left-8 text-gray-600 hover:text-gray-900 flex items-center space-x-2 transition-all duration-300 hover:-translate-x-1"
       >
         <ArrowLeft className="icon-sm" />
         <span className="font-medium">Back to Home</span>
       </button>
 
-      <div className="sm:mx-auto sm:w-full sm:max-w-md reveal">
-        <div className="icon-container mx-auto w-16 h-16 rounded-full bg-blue-100 mb-6">
-          <LinkedinIcon className="h-10 w-auto text-blue-600 animate-pulse-slow" />
+      <div className="sm:mx-auto sm:w-full sm:max-w-md animate-fade-in-up">
+        <div className="mx-auto w-16 h-16 rounded-full bg-blue-100 mb-8 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 hover:bg-blue-200">
+          <LinkedinIcon className="h-10 w-10 text-blue-600 animate-pulse" />
         </div>
         <h2 className="text-center text-4xl font-bold text-gray-900 tracking-tight">
           {isLogin ? 'Welcome back' : 'Join us today'}
@@ -51,10 +53,10 @@ export function LoginPage() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md reveal reveal-delay-1">
-        <div className="bg-white/80 backdrop-blur-sm py-8 px-4 shadow-2xl shadow-blue-500/10 sm:rounded-xl sm:px-10 
-                      border border-gray-100 hover:border-blue-100 transition-all duration-500">
+        <div className="bg-white/90 backdrop-blur-lg py-8 px-4 shadow-xl shadow-blue-500/5 sm:rounded-xl sm:px-10
+                      border border-gray-200 transition-all duration-300 hover:shadow-blue-500/10">
           {error && (
-            <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-lg border border-red-100 animate-shake flex items-center space-x-2">
+            <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-lg border border-red-100 animate-shake flex items-center space-x-2 @apply animate-shake">
               <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div>
               <p>{error}</p>
             </div>
@@ -74,10 +76,10 @@ export function LoginPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
-                  className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm 
-                         focus:border-blue-500 focus:ring-blue-500 
-                         transition-all duration-300
-                         hover:border-gray-400"
+                  className="mt-1 block w-full rounded-lg shadow-sm border-gray-300
+                          focus:border-blue-500 focus:ring-2 focus:ring-blue-200
+                          transition-colors duration-300
+                          hover:border-blue-300"
                 />
               </div>
             )}
@@ -95,10 +97,10 @@ export function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm 
-                       focus:border-blue-500 focus:ring-blue-500 
-                       transition-all duration-300
-                       hover:border-gray-400"
+                className="mt-1 block w-full rounded-lg shadow-sm border-gray-300
+                        focus:border-blue-500 focus:ring-2 focus:ring-blue-200
+                        transition-colors duration-300
+                        hover:border-blue-300"
               />
             </div>
 
@@ -115,10 +117,10 @@ export function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm 
-                       focus:border-blue-500 focus:ring-blue-500 
-                       transition-all duration-300
-                       hover:border-gray-400"
+                className="mt-1 block w-full rounded-lg shadow-sm border-gray-300
+                        focus:border-blue-500 focus:ring-2 focus:ring-blue-200
+                        transition-colors duration-300
+                        hover:border-blue-300"
               />
             </div>
 

@@ -5,7 +5,10 @@ export function TryItFreeButton() {
   
   return (
     <button
-      onClick={() => navigate({ to: '/login' })}
+      onClick={() => {
+        console.log('Navigating to login...');
+        navigate({ to: '/login' });
+      }}
       className="btn-primary"
     >
       Try It Free

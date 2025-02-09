@@ -3,6 +3,22 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      animation: {
+        'fade-in-up': 'fade-in-up 0.5s ease-out',
+        'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97)'
+      },
+      keyframes: {
+        'fade-in-up': {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' }
+        },
+        'shake': {
+          '10%, 90%': { transform: 'translateX(-1px)' },
+          '20%, 80%': { transform: 'translateX(2px)' },
+          '30%, 50%, 70%': { transform: 'translateX(-4px)' },
+          '40%, 60%': { transform: 'translateX(4px)' }
+        }
+      },
       colors: {
         primary: {
           50: '#f0f9ff',
@@ -38,20 +54,12 @@ export default {
         '18': '4.5rem',
         '22': '5.5rem',
       },
-      animation: {
-        'fade-in': 'fadeIn 0.5s ease-in',
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-      },
     },
   },
   plugins: [
     require('@tailwindcss/forms')({
       strategy: 'class',
     }),
+    require('@tailwindcss/typography'),
   ],
 };

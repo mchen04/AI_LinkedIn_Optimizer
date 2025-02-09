@@ -47,6 +47,10 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ isLoading: true, error: null });
     try {
       const response = await api.register(email, password, name);
+      // Store the token when registering
+      if (response.data?.token) {
+        api.setToken(response.data.token);
+      }
       set({ 
         isAuthenticated: true, 
         user: response.data?.user ?? null,

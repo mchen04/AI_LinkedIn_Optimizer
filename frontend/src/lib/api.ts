@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '../config';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 interface ApiResponse<T> {
   status: 'success' | 'fail' | 'error';
@@ -24,21 +24,33 @@ class ApiClient {
   private token: string | null;
 
   constructor() {
-    this.baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+    this.baseUrl = API_BASE_URL;
     this.token = localStorage.getItem('token');
+  }
+
+  private getHeaders(): HeadersInit {
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    };
+
+    if (this.token) {
+      headers['Authorization'] = `Bearer ${this.token}`;
+    }
+
+    return headers;
   }
 
   private async request<T>(
     endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...options.headers,
+      ...(options.headers as Record<string, string>),
     };
 
     if (this.token) {
-      headers.Authorization = `Bearer ${this.token}`;
+      headers['Authorization'] = `Bearer ${this.token}`;
     }
 
     try {
@@ -83,10 +95,16 @@ class ApiClient {
   }
 
   async register(email: string, password: string, name: string): Promise<ApiResponse<LoginResponse>> {
-    return this.request<LoginResponse>('/api/auth/register', {
+    const response = await this.request<LoginResponse>('/api/auth/register', {
       method: 'POST',
       body: JSON.stringify({ email, password, name }),
     });
+    
+    if (response.data?.token) {
+      this.setToken(response.data.token);
+    }
+    
+    return response;
   }
 
   async uploadPDF(file: File): Promise<ApiResponse<{ url: string; id: string }>> {

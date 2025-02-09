@@ -1,7 +1,7 @@
-import { AppError } from '../middleware/errorMiddleware.js';
-import env from '../config/env.js';
+import { AppError } from '../middleware/errorMiddleware';
+import env from '../config/env';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { sanitizeText } from '../utils/security.js';
+import { sanitizeText } from '../utils/security';
 
 interface AIProvider {
   name: string;

@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken';
-import { IUser } from '../models/User.js';
-import env from '../config/env.js';
-import { AppError } from '../middleware/errorMiddleware.js';
+import jwt, { Secret, SignOptions } from 'jsonwebtoken';
+import { IUser } from '../models/User';
+import env from '../config/env';
+import { AppError } from '../middleware/errorMiddleware';
 
 interface TokenPayload {
   id: string;
@@ -15,9 +15,11 @@ export const generateToken = (user: IUser): string => {
       email: user.email
     };
 
-    return jwt.sign(payload, env.JWT_SECRET as jwt.Secret, {
-      expiresIn: env.JWT_EXPIRE
-    });
+    return jwt.sign(
+      payload,
+      env.JWT_SECRET as Secret,
+      { expiresIn: '7d' }
+    );
   } catch (error) {
     throw new AppError('Error generating token', 500);
   }
