@@ -1,0 +1,237 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-gray-800 leading-relaxed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .container-width {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 text-white px-6 py-3 rounded-full font-medium 
+           hover:bg-blue-700 transition-all duration-300 ease-out
+           transform hover:scale-[1.02] active:scale-[0.98]
+           shadow-lg hover:shadow-xl hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-gray-900 px-6 py-3 rounded-full font-medium
+           hover:bg-gray-50 transition-all duration-300 ease-out
+           border border-gray-200
+           transform hover:scale-[1.02] active:scale-[0.98]
+           shadow-md hover:shadow-lg hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2;
+  }
+
+  .section-padding {
+    @apply py-16;
+  }
+
+  .h-18 {
+    height: 4.5rem;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 ease-out
+           border border-gray-100 hover:-translate-y-1;
+  }
+
+  /* Icon styles */
+  .icon-xs {
+    @apply w-4 h-4 flex-shrink-0;
+  }
+
+  .icon-sm {
+    @apply w-5 h-5 flex-shrink-0;
+  }
+
+  .icon-md {
+    @apply w-6 h-6 flex-shrink-0;
+  }
+
+  .icon-lg {
+    @apply w-8 h-8 flex-shrink-0;
+  }
+
+  .icon-xl {
+    @apply w-12 h-12 flex-shrink-0;
+  }
+
+  .icon-container {
+    @apply flex items-center justify-center transition-all duration-300 ease-out
+           hover:scale-110 hover:bg-primary-100;
+  }
+
+  .icon-badge {
+    @apply inline-flex items-center justify-center p-2 rounded-full;
+  }
+
+  /* Animation classes */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  }
+
+  /* Intersection Observer Animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 {
+    transition-delay: 0.1s;
+  }
+
+  .reveal-delay-2 {
+    transition-delay: 0.2s;
+  }
+
+  .reveal-delay-3 {
+    transition-delay: 0.3s;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(0.89);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-2px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(2px);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}

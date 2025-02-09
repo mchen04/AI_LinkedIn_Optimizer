@@ -1,0 +1,42 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for AI-Enhanced LinkedIn Resume Improver",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "lint": "eslint src --ext .ts",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "bcryptjs": "*",
+    "cors": "^2.8.5",
+    "dotenv": "*",
+    "envalid": "^8.0.0",
+    "express": "*",
+    "express-validator": "*",
+    "helmet": "*",
+    "jsonwebtoken": "*",
+    "mongoose": "*",
+    "multer": "*",
+    "pdf2json": "^3.1.4"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "*",
+    "@types/cors": "*",
+    "@types/express": "*",
+    "@types/jsonwebtoken": "*",
+    "@types/multer": "*",
+    "@types/node": "*",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "*"
+  }
+}
