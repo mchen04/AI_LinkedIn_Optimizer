@@ -6,8 +6,7 @@ export function TryItFreeButton() {
   return (
     <button
       onClick={() => {
-        console.log('Navigating to login...');
-        navigate({ to: '/login' });
+        navigate({ to: '/login', search: { mode: 'register' } });
       }}
       className="btn-primary"
     >

@@ -9,7 +9,10 @@ export function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('mode') !== 'register';
+  });
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { login, register, isLoading } = useAuthStore();
@@ -40,21 +43,18 @@ export function LoginPage() {
         <span className="font-medium">Back to Home</span>
       </button>
 
-      <div className="sm:mx-auto sm:w-full sm:max-w-md animate-fade-in-up">
-        <div className="mx-auto w-16 h-16 rounded-full bg-blue-100 mb-8 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 hover:bg-blue-200">
-          <LinkedinIcon className="h-10 w-10 text-blue-600 animate-pulse" />
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="mx-auto w-16 h-16 rounded-full bg-blue-100 mb-8 flex items-center justify-center">
+          <LinkedinIcon className="h-10 w-10 text-blue-600" />
         </div>
-        <h2 className="text-center text-4xl font-bold text-gray-900 tracking-tight">
+        <h2 className="text-center text-4xl font-bold text-gray-900 mb-4">
           {isLogin ? 'Welcome back' : 'Join us today'}
         </h2>
-        <p className="mt-3 text-center text-gray-600">
+        <p className="text-center text-gray-600 mb-8">
           {isLogin ? 'Sign in to continue your journey' : 'Create an account to get started'}
         </p>
-      </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md reveal reveal-delay-1">
-        <div className="bg-white/90 backdrop-blur-lg py-8 px-4 shadow-xl shadow-blue-500/5 sm:rounded-xl sm:px-10
-                      border border-gray-200 transition-all duration-300 hover:shadow-blue-500/10">
+        <div className="bg-white py-8 px-4 shadow-xl rounded-xl sm:px-10 border border-gray-200">
           {error && (
             <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-lg border border-red-100 animate-shake flex items-center space-x-2 @apply animate-shake">
               <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div>
@@ -64,8 +64,8 @@ export function LoginPage() {
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             {!isLogin && (
-              <div className="space-y-1">
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                   Full Name
                 </label>
                 <input
@@ -76,16 +76,13 @@ export function LoginPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
-                  className="mt-1 block w-full rounded-lg shadow-sm border-gray-300
-                          focus:border-blue-500 focus:ring-2 focus:ring-blue-200
-                          transition-colors duration-300
-                          hover:border-blue-300"
+                  className="block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 />
               </div>
             )}
 
-            <div className="space-y-1">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 Email Address
               </label>
               <input
@@ -97,15 +94,12 @@ export function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="mt-1 block w-full rounded-lg shadow-sm border-gray-300
-                        focus:border-blue-500 focus:ring-2 focus:ring-blue-200
-                        transition-colors duration-300
-                        hover:border-blue-300"
+                className="block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
 
-            <div className="space-y-1">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                 Password
               </label>
               <input
@@ -117,25 +111,18 @@ export function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="mt-1 block w-full rounded-lg shadow-sm border-gray-300
-                        focus:border-blue-500 focus:ring-2 focus:ring-blue-200
-                        transition-colors duration-300
-                        hover:border-blue-300"
+                className="block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
 
-            <div className="pt-2">
+            <div>
               <button
                 type="submit"
                 disabled={isLoading}
                 className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg
-                       text-sm font-semibold text-white bg-blue-600 
-                       hover:bg-blue-700 focus:outline-none focus:ring-2 
-                       focus:ring-offset-2 focus:ring-blue-500 
-                       disabled:opacity-50 disabled:cursor-not-allowed
-                       transform transition-all duration-300
-                       hover:scale-[1.02] active:scale-[0.98]
-                       shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                       text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700
+                       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                       disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
                   <div className="flex items-center space-x-2">
@@ -149,11 +136,10 @@ export function LoginPage() {
             </div>
           </form>
 
-          <div className="mt-8 pt-4 border-t border-gray-100">
+          <div className="mt-6 text-center">
             <button
               onClick={() => setIsLogin(!isLogin)}
-              className="w-full text-center text-sm text-gray-500 hover:text-gray-900
-                     transition-all duration-300 hover:underline decoration-blue-500 underline-offset-4"
+              className="text-sm text-blue-600 hover:text-blue-800 font-medium"
             >
               {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
             </button>
