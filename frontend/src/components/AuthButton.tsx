@@ -23,15 +23,20 @@ export function AuthButton() {
 
   if (!isAuthenticated) {
     return (
-      <button
-        onClick={() => {
-          setIsDropdownOpen(false);
-          navigate({ to: '/login' });
-        }}
-        className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 focus:outline-none"
-      >
-        <UserCircle2 className="w-8 h-8 text-gray-500" />
-      </button>
+      <div className="flex items-center space-x-4">
+        <button
+          onClick={() => navigate({ to: '/login' })}
+          className="text-gray-600 hover:text-gray-900 font-medium"
+        >
+          Sign In
+        </button>
+        <button
+          onClick={() => navigate({ to: '/login', search: { mode: 'register' } })}
+          className="btn-primary"
+        >
+          Register
+        </button>
+      </div>
     );
   }
 
